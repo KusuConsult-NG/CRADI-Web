@@ -5,9 +5,10 @@ import { verifyToken } from '@/lib/auth';
 // GET /api/courses/[id]/students - Get enrolled students for a course
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id: courseId } = await params;
         const token = request.headers.get('authorization')?.replace('Bearer ', '');
         if (!token) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -17,8 +18,6 @@ export async function GET(
         if (!decoded || (decoded.role !== 'LECTURER' && decoded.role !== 'ADMIN')) {
             return NextResponse.json({ error: 'Insufficient permissions' }, { status: 403 });
         }
-
-        const courseId = params.id;
 
         // Verify lecturer has access to this course
         if (decoded.role === 'LECTURER') {

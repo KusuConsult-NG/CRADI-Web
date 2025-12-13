@@ -19,6 +19,15 @@ import {
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 
+interface Lesson {
+    id: string;
+    title: string;
+    duration: string;
+    completed: boolean;
+    type: string;
+    locked?: boolean;
+}
+
 export default function StudentCoursePage() {
     const params = useParams();
     const courseId = params?.id as string;
@@ -36,21 +45,21 @@ export default function StudentCoursePage() {
                 id: '1',
                 title: 'Introduction to ML',
                 lessons: [
-                    { id: '1-1', title: 'What is Machine Learning?', duration: '15 min', completed: true, type: 'video' },
-                    { id: '1-2', title: 'Types of ML Algorithms', duration: '20 min', completed: true, type: 'video' },
-                    { id: '1-3', title: 'ML Workflow', duration: '18 min', completed: true, type: 'video' },
-                    { id: '1-4', title: 'Quiz: Introduction', duration: '10 min', completed: false, type: 'quiz' },
-                ],
+                    { id: '1-1', title: 'What is Machine Learning?', duration: '15 min', completed: true, type: 'video', locked: false },
+                    { id: '1-2', title: 'Types of ML Algorithms', duration: '20 min', completed: true, type: 'video', locked: false },
+                    { id: '1-3', title: 'ML Workflow', duration: '18 min', completed: true, type: 'video', locked: false },
+                    { id: '1-4', title: 'Quiz: Introduction', duration: '10 min', completed: false, type: 'quiz', locked: false },
+                ] as Lesson[],
             },
             {
                 id: '2',
                 title: 'Supervised Learning',
                 lessons: [
-                    { id: '2-1', title: 'Linear Regression', duration: '25 min', completed: true, type: 'video' },
-                    { id: '2-2', title: 'Logistic Regression', duration: '22 min', completed: true, type: 'video' },
-                    { id: '2-3', title: 'Decision Trees', duration: '30 min', completed: false, type: 'video' },
-                    { id: '2-4', title: 'Assignment: Build a Model', duration: '120 min', completed: false, type: 'assignment' },
-                ],
+                    { id: '2-1', title: 'Linear Regression', duration: '25 min', completed: true, type: 'video', locked: false },
+                    { id: '2-2', title: 'Logistic Regression', duration: '22 min', completed: true, type: 'video', locked: false },
+                    { id: '2-3', title: 'Decision Trees', duration: '30 min', completed: false, type: 'video', locked: false },
+                    { id: '2-4', title: 'Assignment: Build a Model', duration: '120 min', completed: false, type: 'assignment', locked: false },
+                ] as Lesson[],
             },
             {
                 id: '3',
@@ -58,7 +67,7 @@ export default function StudentCoursePage() {
                 lessons: [
                     { id: '3-1', title: 'Perceptrons', duration: '20 min', completed: false, type: 'video', locked: true },
                     { id: '3-2', title: 'Backpropagation', duration: '25 min', completed: false, type: 'video', locked: true },
-                ],
+                ] as Lesson[],
             },
         ],
     };
